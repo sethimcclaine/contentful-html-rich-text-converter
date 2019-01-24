@@ -1,0 +1,22 @@
+{
+  "data": {},
+  "content": [
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "value": "<a href=\"www.aol.com\"></a>",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "paragraph"
+    }
+  ],
+  "nodeType": "document"
+}
