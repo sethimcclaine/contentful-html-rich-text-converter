@@ -116,10 +116,11 @@ const transformDom = (dom) => {
                         nodeType: 'text',
                     }];
                 }
+
                 newData = {
                     data: {},
                     content,
-                    nodeType: htmlAttrs[type][data],
+                    nodeType: htmlAttrs[type][name],
                 };
             }
         } else {

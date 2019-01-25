@@ -1,0 +1,90 @@
+{
+  "data": {},
+  "content": [
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "h1",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "heading-1"
+    },
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "h2",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "heading-2"
+    },
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "h3",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "heading-3"
+    },
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "h4",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "heading-4"
+    },
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "h5",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "heading-5"
+    },
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "h6",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "heading-6"
+    },
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "paragraph"
+    }
+  ],
+  "nodeType": "document"
+}

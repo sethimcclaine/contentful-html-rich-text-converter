@@ -94,7 +94,7 @@ const { BLOCKS } = require('@contentful/rich-text-types');
 /**
  * Only for testing our `parseHtml()`
  */
-const runTest = (richText) => {
+const runTest = (richText, extension = [], json) => {
     const options = {
         renderNode: {
             [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
@@ -103,32 +103,47 @@ const runTest = (richText) => {
     };
     const html = documentToHtmlString(richText, options);
 
-    console.log(html);
+    if(typeof json === 'boolean') {
+        console.log(html);
+    }
 
     const transformed = parseHtml(html); // leads to handlFn
 
-    return compare(transformed, richText, ['content', 0], true);
+    return compare(transformed, richText, extension, json);
 };
 /*
 const contentful = require('contentful');
 const creds = require('../creds.json')
-const getContentfulContent = (callback) => {
+const getContentfulContent = () => {
     contentful.createClient(creds).getEntries({
         content_type: 'sample',
         'fields.name[in]': 'Test',
     }).then((entries) => {
-        callback(entries.items[0].fields.richText);
+        runTest(entries.items[0].fields.richText, [], true);
     }).catch((e) => {
         throw e;
     });
 };
 
-getContentfulContent(runTest);
+getContentfulContent();
 /*/
+const printRes = (title, file) => {
+    const res = runTest(require(file));
+    const color = res ? "\x1b[42m" : "\x1b[41m";
+    const status = res ? 'passed' : 'failed';
+    console.log(color, status, "\x1b[0m", title);
+}
 
 //https://jsonformatter.org/
-console.log('Bold, Italic, Underline:' + runTest(require('./boldItalicUnderline.json')));
-console.log('ul:' + runTest(require('./ul.json')));
-console.log('ol:' + runTest(require('./ul.json')));
-//console.log('codeblock:' + runTest(require('./codeblock.json')));
+printRes('Bold, Italic, Underline', './boldItalicUnderline.json');
+printRes('ul', './ul.json');
+printRes('ol', './ol.json');
+printRes('hr', './hr.json');
+printRes('blockquote', './blockquote.json');
+printRes('headings', './headings.json')
+//Still broken
+console.log('codeblock:' + runTest(require('./codeblock.json'), ['content', 0], true));
+printRes('codeblock', './codeblock.json');
+console.log('hyperlink:' + runTest(require('./hyperlink.json'), ['content', 0, 'content'], false));
+printRes('hyperlink', './hyperlink.json');
 //*/

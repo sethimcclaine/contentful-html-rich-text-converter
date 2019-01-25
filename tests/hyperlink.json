@@ -1,0 +1,38 @@
+{
+  "data": {},
+  "content": [
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "",
+          "nodeType": "text"
+        },
+        {
+          "data": {
+            "uri": "http://www.aol.com"
+          },
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "asdf",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "hyperlink"
+        },
+        {
+          "data": {},
+          "marks": [],
+          "value": "",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "paragraph"
+    }
+  ],
+  "nodeType": "document"
+}

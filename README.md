@@ -94,8 +94,16 @@ Output:
 * `<u>`
 * `<i>`
 * `<p>`
+* `<hr>`
+* `<blockquote>`
+* `<h{1-6}>`
 
 ### In development
 
 * `<code>`
- 
+* `<a>`
+* `<img>`
+
+##Git Repository
+
+https://github.com/sethimcclaine/contentful-html-rich-text-converter
