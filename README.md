@@ -1,4 +1,4 @@
-# @contentful/html-rich-text-converter
+# contentful-html-rich-text-converter
 This package was built to support migration of rich text into contentful
 
 **This package is currently still under development and in beta**

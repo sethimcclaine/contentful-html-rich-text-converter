@@ -1,3 +1,4 @@
 *.swp
 node_modules
 creds.json
+NPMINFO.txt
