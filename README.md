@@ -87,14 +87,15 @@ Output:
 
 ### Verified
 
-* <ul>
-* <ol>
-* <li>
-* <b>
-* <u>
-* <i>
-* <p>
+* `<ul>`
+* `<ol>`
+* `<li>`
+* `<b>`
+* `<u>`
+* `<i>`
+* `<p>`
 
 ### In development
-* <code>
+
+* `<code>`
  
