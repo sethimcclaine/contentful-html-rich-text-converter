@@ -96,12 +96,12 @@ Output:
 * `<p>`
 * `<hr>`
 * `<blockquote>`
+* `<p>`
 * `<h{1-6}>`
+* `<a>`
+* `<code>`
 
 ### In development
-
-* `<code>`
-* `<a>`
 * `<img>`
 
 ##Git Repository

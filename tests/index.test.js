@@ -1,59 +1,7 @@
-/**
- * return in console
- */
+const R = require('ramda');
+
 const nl = (content) => process.stdout.write('\n'+content+'\n');
 
-const R = require('ramda');
-const iFetch = require('isomorphic-fetch');
-
-//https://github.com/contentful/contentful-migration
-const { runMigration } = require('contentful-migration/built/bin/cli');
-
-const getDrupalContent = (id) => {
-    /*
-    const contentHost = "https://content.sans.org/lab-instructions?_format=json";
-    /*/
-    const contentHost = "https://content.sans.org/lab-instruction-blurbs?_format=json";
-    //*/
-
-    iFetch(contentHost, {
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        requestContext: {
-            authorizer: {
-                sansAccountID: '2709112', // Charlie's employee account
-                isEmployee: 'yes',
-            },
-        },
-    }).then((resp) => {
-        if (!resp.ok) {
-            console.log('ERROR');
-        }
-        resp.json().then((data) => {
-            console.log(data)
-        });
-    });
-};
-
-/**
- * Don't use this.... look at `cli space import/export`
- * https://github.com/contentful/contentful-cli/tree/master/docs/space
- */
-const putContent = () => {
-    const opts = {
-        filePath: '/Users/smcclaine/Documents/Projects/cmp/cmp_lambda/src/utils/contentful/migration.js',
-        spaceId: 'gedg1u5b0yz9',
-        accessToken: 'bb7d26f060d68e894175a532bf3d6c04385d8eda9aa7e62bbd00ff6a5547162a',
-        yes: true,
-    };
-
-    runMigration(opts)
-        .then(() => console.log('Migration Complete!'))
-        .catch((e) => console.error(e));
-};
-//----------------------------------------------------------------------------
 /**
  * compare original contentful data to generated data
  */
@@ -104,7 +52,7 @@ const runTest = (richText, extension = [], json) => {
     const html = documentToHtmlString(richText, options);
 
     if(typeof json === 'boolean') {
-        console.log(html);
+        console.log(html); //valid
     }
 
     const transformed = parseHtml(html); // leads to handlFn
@@ -130,8 +78,8 @@ getContentfulContent();
 const printRes = (title, file) => {
     const res = runTest(require(file));
     const color = res ? "\x1b[42m" : "\x1b[41m";
-    const status = res ? 'passed' : 'failed';
-    console.log(color, status, "\x1b[0m", title);
+    const status = res ? '✓' : '×';
+    console.log(color, status, "\x1b[0m", title); //valid
 }
 
 //https://jsonformatter.org/
@@ -141,9 +89,12 @@ printRes('ol', './ol.json');
 printRes('hr', './hr.json');
 printRes('blockquote', './blockquote.json');
 printRes('headings', './headings.json')
-//Still broken
-console.log('codeblock:' + runTest(require('./codeblock.json'), ['content', 0], true));
-printRes('codeblock', './codeblock.json');
-console.log('hyperlink:' + runTest(require('./hyperlink.json'), ['content', 0, 'content'], false));
 printRes('hyperlink', './hyperlink.json');
+printRes('codeblock', './codeblock.json');
+
+console.log('Break Things #1' + runTest(require('./break1.json'), ['content'], false));
+printRes('Break Things #1', './break1.json');
+//Still broken
+//console.log('img:' + runTest(require('./img.json'), ['content', 0, 'data', 'target'], false));
+//printRes('img', './img.json');
 //*/

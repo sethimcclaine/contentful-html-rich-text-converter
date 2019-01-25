@@ -106,9 +106,25 @@ const transformDom = (dom) => {
                 //console.log(elm);
 
                 newData = R.assoc('marks', R.append({ type: htmlAttrs[type][name] }, content[0].marks), content[0]);
+            } else if (name === 'a') {
+                newData = [{
+                    data: {},
+                    marks: [],
+                    value: '',
+                    nodeType: 'text',
+                }, {
+                    data: { uri: attribs.href },
+                    content,
+                    nodeType: htmlAttrs[type][name],
+                }, {
+                    data: {},
+                    marks: [],
+                    value: '',
+                    nodeType: 'text',
+                }];
             } else {
                 //They want to make sure there is always a text element inside paragraphs
-                if (data === 'p' && !content.length) {
+                if (name === 'p' && !content.length) {
                     content = [{
                         data: {},
                         marks: [],
@@ -126,7 +142,7 @@ const transformDom = (dom) => {
         } else {
             console.log('***new type needed -', type, data);
         }
-        results = R.append(newData, results);
+        results = R[R.type(newData) === 'Array' ? 'concat' : 'append'](newData, results);
     }, dom);
     return results;
 };

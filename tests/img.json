@@ -1,0 +1,64 @@
+{
+  "data": {},
+  "content": [
+    {
+      "data": {
+        "target": {
+          "sys": {
+            "space": {
+              "sys": {
+                "type": "Link",
+                "linkType": "Space",
+                "id": "i768r1hup5oj"
+              }
+            },
+            "id": "5PtBwAj1AS4nia2sOVmoKQ",
+            "type": "Asset",
+            "createdAt": "2019-01-24T16:49:00.200Z",
+            "updatedAt": "2019-01-24T18:57:29.611Z",
+            "environment": {
+              "sys": {
+                "id": "master",
+                "type": "Link",
+                "linkType": "Environment"
+              }
+            },
+            "revision": 3,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "sample",
+            "description": "sample screenshot description",
+            "file": {
+              "url": "//images.ctfassets.net/i768r1hup5oj/5PtBwAj1AS4nia2sOVmoKQ/20f232b730ce91b8385386d2559cd26e/sample.png",
+              "details": {
+                "size": 46234,
+                "image": {
+                  "width": 1260,
+                  "height": 512
+                }
+              },
+              "fileName": "sample.png",
+              "contentType": "image/png"
+            }
+          }
+        }
+      },
+      "content": [],
+      "nodeType": "embedded-asset-block"
+    },
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "marks": [],
+          "value": "",
+          "nodeType": "text"
+        }
+      ],
+      "nodeType": "paragraph"
+    }
+  ],
+  "nodeType": "document"
+}
