@@ -12,7 +12,7 @@ Using npm:
 ## Use
 
 ```
-const { parseHtml } = require('@contful/html-rich-textconverter');
+const { parseHtml } = require('contentful-html-rich-text-converter');
 
 const html = '<ul><li><p>a</p></li><li><p>b</p></li><li><p>c</p></li></ul><p></p>';
 const result = parseHtml(html);
