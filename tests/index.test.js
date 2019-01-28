@@ -5,12 +5,15 @@ const nl = (content) => process.stdout.write('\n'+content+'\n');
 /**
  * compare original contentful data to generated data
  */
-const compare = (transformed, richText, extension = [], json) => {
+const compare = (transformed, richText, html, extension = [], json) => {
     const gen = R.pathOr('undefined', extension, transformed);
     const cont = R.pathOr('undefined', extension, richText);
     const equal = JSON.stringify(gen) === JSON.stringify(cont);
 
     if (typeof json === 'boolean') {
+        nl('**html**');
+        console.log(html);
+
         if (json) {
             nl('**generated**');
             console.log(JSON.stringify(gen));
@@ -22,20 +25,15 @@ const compare = (transformed, richText, extension = [], json) => {
             nl('**contentful**');
             console.log(cont);
         }
+
         nl('**equal**');
         console.log(equal);
     }
 
     return equal;
 };
-/**
- * parse me some html
- */
 
 const { parseHtml } = require('../index');
-/*
- * Print out content from contentful
- */
 const { documentToHtmlString } = require('@contentful/rich-text-html-renderer');
 const { BLOCKS } = require('@contentful/rich-text-types');
 
@@ -51,17 +49,14 @@ const runTest = (richText, extension = [], json) => {
     };
     const html = documentToHtmlString(richText, options);
 
-    if(typeof json === 'boolean') {
-        console.log(html); //valid
-    }
-
     const transformed = parseHtml(html); // leads to handlFn
 
-    return compare(transformed, richText, extension, json);
+    return compare(transformed, richText, html, extension, json);
 };
 /*
 const contentful = require('contentful');
-const creds = require('../creds.json')
+//Create a creds.json file with fields `space`, `accessToken`
+const creds = require('../creds.json');
 const getContentfulContent = () => {
     contentful.createClient(creds).getEntries({
         content_type: 'sample',
@@ -91,8 +86,6 @@ printRes('blockquote', './blockquote.json');
 printRes('headings', './headings.json')
 printRes('hyperlink', './hyperlink.json');
 printRes('codeblock', './codeblock.json');
-
-console.log('Break Things #1' + runTest(require('./break1.json'), ['content'], false));
 printRes('Break Things #1', './break1.json');
 //Still broken
 //console.log('img:' + runTest(require('./img.json'), ['content', 0, 'data', 'target'], false));

@@ -5,12 +5,6 @@
       "data": {},
       "content": [
         {
-          "data": {},
-          "marks": [],
-          "value": "",
-          "nodeType": "text"
-        },
-        {
           "data": {
             "uri": "http://www.aol.com"
           },
@@ -23,12 +17,6 @@
             }
           ],
           "nodeType": "hyperlink"
-        },
-        {
-          "data": {},
-          "marks": [],
-          "value": "",
-          "nodeType": "text"
         }
       ],
       "nodeType": "paragraph"
