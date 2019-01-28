@@ -104,8 +104,6 @@ const transformDom = (dom) => {
                 };
 
             } else if (R.contains(name, ['i', 'b', 'u'])) {
-                //console.log(elm);
-
                 newData = R.assoc('marks', R.append({ type: htmlAttrs[type][name] }, content[0].marks), content[0]);
             } else if (name === 'a') {
                 /*
@@ -131,6 +129,26 @@ const transformDom = (dom) => {
                     nodeType: htmlAttrs[type][name],
                 };
                 //*/
+            } else if(name === 'li') {
+                //@TODO shouldn't need to cast to an array...
+                content = R.type(content) === 'Array' ? content : [content];
+                //Seems to want text wrapped in some type of content tag (p, h*, etc)
+                content = R.map((node)=> {
+                    if (node.nodeType === 'text') {
+                        return {
+                            "data": {},
+                            "content": [node],
+                            "nodeType": "paragraph"
+                        };
+                    }
+                    return node;
+                }, content);
+
+                newData = {
+                    data: {},
+                    content,
+                    nodeType: htmlAttrs[type][name],
+                };
             } else {
                 //They want to make sure there is always a text element inside paragraphs
                 if (name === 'p' && !content.length) {

@@ -109,4 +109,4 @@ const htmlTest = (html) => {
 }
 
 
-console.log(htmlTest('<ul><li><span><span>Do not</span></span></li>\n\t<li><span><span>You must work.</span></span></li>\n\t<li><span><span>You may need to risk software.</span></span></li>\n</ul>'));
+console.log(htmlTest('<ul><li><span><span>Do not</span></span></li><li><span><span>You must work.</span></span></li><li><span><span>You may need to risk software.</span></span></li></ul>'));
