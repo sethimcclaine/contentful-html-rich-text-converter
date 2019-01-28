@@ -83,7 +83,7 @@ printRes('ul', './ul.json');
 printRes('ol', './ol.json');
 printRes('hr', './hr.json');
 printRes('blockquote', './blockquote.json');
-printRes('headings', './headings.json')
+printRes('headings', './headings.json');
 printRes('hyperlink', './hyperlink.json');
 printRes('codeblock', './codeblock.json');
 printRes('Break Things #1', './break1.json');

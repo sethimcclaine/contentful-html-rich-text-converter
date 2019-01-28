@@ -7,7 +7,7 @@ This package was built to support migration of rich text into contentful
 
 Using npm:
 
-`npm install @contentful/html-rich-text-converter`
+`npm install contentful-html-rich-text-converter`
 
 ## Use
 
