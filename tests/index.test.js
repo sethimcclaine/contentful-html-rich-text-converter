@@ -76,7 +76,7 @@ const printRes = (title, file) => {
     const status = res ? '✓' : '×';
     console.log(color, status, "\x1b[0m", title); //valid
 }
-
+/*
 //https://jsonformatter.org/
 printRes('Bold, Italic, Underline', './boldItalicUnderline.json');
 printRes('ul', './ul.json');
@@ -91,3 +91,22 @@ printRes('Break Things #1', './break1.json');
 //console.log('img:' + runTest(require('./img.json'), ['content', 0, 'data', 'target'], false));
 //printRes('img', './img.json');
 //*/
+
+const htmlTest = (html) => {
+    const json = parseHtml(html);
+    const options = {
+        renderNode: {
+            [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
+                `<img src="${fields.file.url}" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`,
+        },
+    };
+    const newHtml = documentToHtmlString(json, options);
+    nl('** Original **');
+    console.log(html);
+    nl('** New **');
+    console.log(newHtml);
+    return html === newHtml;
+}
+
+
+console.log(htmlTest('<ul><li><span><span>Do not</span></span></li>\n\t<li><span><span>You must work.</span></span></li>\n\t<li><span><span>You may need to risk software.</span></span></li>\n</ul>'));

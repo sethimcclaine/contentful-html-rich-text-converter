@@ -23,6 +23,7 @@ const htmlAttrs = {
         em: 'italic',
         u: 'underline',
         img: 'embedded-asset-block',
+        span: 'text',
     },
     text: 'text',
 };
@@ -52,10 +53,11 @@ const transformDom = (dom) => {
         } else if (type === 'tag') {
             if (!htmlAttrs[type][name]) {
                 console.log('*** new data needed under', type, name);
-                //console.log(elm);
             }
-
-            if (name === 'code') {
+            if(name === 'span') {
+                //Spans seem to just be passed through
+                newData = content;
+            } else if (name === 'code') {
                 const Entities = require('html-entities').XmlEntities;
                 const entities = new Entities();
 
