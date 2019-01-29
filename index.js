@@ -15,6 +15,7 @@ const htmlAttrs = {
         h5: 'heading-5',
         h6: 'heading-6',
         hr: 'hr',
+        br: 'br',
         a: 'hyperlink',
         b: 'bold',
         strong: 'bold',
@@ -39,7 +40,6 @@ const transformDom = (dom) => {
         let content = [];
         let newData = {};
         if (children) {
-            //console.log(children);
             content = transformDom(children);
         }
 
@@ -52,7 +52,7 @@ const transformDom = (dom) => {
             };
         } else if (type === 'tag') {
             if (!htmlAttrs[type][name]) {
-                console.log('*** new data needed under', type, name);
+                console.log('*** new data needed under -', type, name);
             }
             if(name === 'span') {
                 //Spans seem to just be passed through
@@ -103,7 +103,7 @@ const transformDom = (dom) => {
                     nodeType: htmlAttrs[type][name],
                 };
 
-            } else if (R.contains(name, ['i', 'b', 'u'])) {
+            } else if (R.contains(name, ['i', 'b', 'strong', 'u'])) {
                 newData = R.assoc('marks', R.append({ type: htmlAttrs[type][name] }, content[0].marks), content[0]);
             } else if (name === 'a') {
                 /*
@@ -124,7 +124,7 @@ const transformDom = (dom) => {
                 }];
                 /*/
                 newData = {
-                    data: { uri: attribs.href },
+                    data: { uri: R.propOr('', 'href', attribs) },
                     content,
                     nodeType: htmlAttrs[type][name],
                 };
