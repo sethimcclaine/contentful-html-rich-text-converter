@@ -130,23 +130,35 @@ const transformDom = (dom) => {
                 };
                 //*/
             } else if(name === 'li') {
+                //console.log(elm);
                 //@TODO shouldn't need to cast to an array...
                 content = R.type(content) === 'Array' ? content : [content];
+                let newContent = [];
+
                 //Seems to want text wrapped in some type of content tag (p, h*, etc)
-                content = R.map((node)=> {
+                content = R.forEach((node)=> {
                     if (node.nodeType === 'text') {
-                        return {
-                            "data": {},
-                            "content": [node],
-                            "nodeType": "paragraph"
-                        };
+                        //if the last of new content isn't a `paragraph`
+                        if (R.propOr(false, 'nodeType', R.last(newContent)) !== 'paragraph') {
+                            console.log('here');
+                            //append a p node
+                            newContent = R.append({
+                                "data": {},
+                                "content": [],
+                                "nodeType": "paragraph"
+                            }, newContent);
+                        }
+                        //put node in R.last(newContent).content
+                        console.log(newContent);
+                        newContent[newContent.length - 1].content.push(node);
+                    } else {
+                        newContent = R.append(node, newContent);
                     }
-                    return node;
                 }, content);
 
                 newData = {
                     data: {},
-                    content,
+                    content: newContent,
                     nodeType: htmlAttrs[type][name],
                 };
             } else {
