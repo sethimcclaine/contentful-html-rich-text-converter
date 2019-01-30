@@ -100,10 +100,10 @@ Output:
 * `<h{1-6}>`
 * `<a>`
 * `<code>`
+* `<br />`
 
 ### In development
 * `<img>`
-* `<br />`
 
 ##Git Repository
 

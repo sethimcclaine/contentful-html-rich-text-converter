@@ -1,6 +1,6 @@
 const htmlParser = require('htmlparser');
 const R = require('ramda');
-
+const { paragraph } = require('./helpers');
 const htmlAttrs = {
     tag: {
         ul: 'unordered-list',
@@ -127,11 +127,15 @@ const transformDom = (dom) => {
                             //if the last of new content isn't a `paragraph`
                             if (R.propOr(false, 'nodeType', R.last(newContent)) !== 'paragraph') {
                                 //append a p node
+                                /*
                                 newContent = R.append({
-                                    "data": {},
-                                    "content": [],
-                                    "nodeType": "paragraph"
+                                    data: {},
+                                    content: [],
+                                    nodeType: 'paragraph'
                                 }, newContent);
+                                /*/
+                                newContent = R.concat(newContent, paragraph([], 'paragraph'));
+                                //*/
                             }
                             //put node in R.last(newContent).content
                             newContent[newContent.length - 1].content.push(node);
@@ -152,17 +156,9 @@ const transformDom = (dom) => {
                 case 'h3':
                 case 'h4':
                 case 'h5':
-                    if (!content.length) {
-                        content = [{
-                            data: {},
-                            marks: [],
-                            value: '',
-                            nodeType: 'text',
-                        }];
-                    } else {
-                        //@TODO check for br tags...
-                    }
-                    //falls through
+                case 'h6':
+                    newData = paragraph(content, htmlAttrs[type][name])
+                    break
                 default:
                     if (!htmlAttrs[type][name]) {
                         console.log('*** new data needed under -', type, name);
