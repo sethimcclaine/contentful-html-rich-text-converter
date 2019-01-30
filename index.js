@@ -106,31 +106,12 @@ const transformDom = (dom) => {
             } else if (R.contains(name, ['i', 'b', 'strong', 'u'])) {
                 newData = R.assoc('marks', R.append({ type: htmlAttrs[type][name] }, content[0].marks), content[0]);
             } else if (name === 'a') {
-                /*
-                newData = [{
-                    data: {},
-                    marks: [],
-                    value: '',
-                    nodeType: 'text',
-                }, {
-                    data: { uri: attribs.href },
-                    content,
-                    nodeType: htmlAttrs[type][name],
-                }, {
-                    data: {},
-                    marks: [],
-                    value: '',
-                    nodeType: 'text',
-                }];
-                /*/
                 newData = {
                     data: { uri: R.propOr('', 'href', attribs) },
                     content,
                     nodeType: htmlAttrs[type][name],
                 };
-                //*/
             } else if(name === 'li') {
-                //console.log(elm);
                 //@TODO shouldn't need to cast to an array...
                 content = R.type(content) === 'Array' ? content : [content];
                 let newContent = [];
@@ -140,7 +121,6 @@ const transformDom = (dom) => {
                     if (node.nodeType === 'text') {
                         //if the last of new content isn't a `paragraph`
                         if (R.propOr(false, 'nodeType', R.last(newContent)) !== 'paragraph') {
-                            console.log('here');
                             //append a p node
                             newContent = R.append({
                                 "data": {},
@@ -149,7 +129,6 @@ const transformDom = (dom) => {
                             }, newContent);
                         }
                         //put node in R.last(newContent).content
-                        console.log(newContent);
                         newContent[newContent.length - 1].content.push(node);
                     } else {
                         newContent = R.append(node, newContent);
