@@ -51,115 +51,135 @@ const transformDom = (dom) => {
                 nodeType: type,
             };
         } else if (type === 'tag') {
-            if (!htmlAttrs[type][name]) {
-                console.log('*** new data needed under -', type, name);
-            }
-            if(name === 'span') {
-                //Spans seem to just be passed through
-                newData = content;
-            } else if (name === 'code') {
-                const Entities = require('html-entities').XmlEntities;
-                const entities = new Entities();
+            switch(name) {
+                case 'span':
+                    //Spans seem to just be passed through
+                    newData = content;
+                    break;
+                case 'code':
+                    const Entities = require('html-entities').XmlEntities;
+                    const entities = new Entities();
 
-                newData = R.map((node) => {
-                    node = R.assoc('value', entities.decode(node.value), node);
-                    node = R.assoc('marks', R.append({type: 'code'}, node.marks), node);
-                    return node;
-                }, content);
-            } else if (name === 'img') {
-                const fileName = R.last(R.split('/', attribs.src));
+                    newData = R.map((node) => {
+                        node = R.assoc('value', entities.decode(node.value), node);
+                        node = R.assoc('marks', R.append({type: 'code'}, node.marks), node);
+                        return node;
+                    }, content);
+                    break;
+                case 'img':
+                    const fileName = R.last(R.split('/', attribs.src));
 
-                newData = {
-                    data: {
-                        target: {
-                            sys: {
-                                space: {},
-                                type: 'Asset',
-                                createdAt: '',
-                                updatedAt: '',
-                                environment: {},
-                                revision: null,
-                                locale: 'en-US',
-                            },
-                            fields: {
-                                title: R.head(R.split('.', fileName)),
-                                description: attribs.alt,
-                                file: {
-                                    url: attribs.src,
-                                    details: {
-                                        size: 46234, //@TODO - don't hardcode
-                                        image: {
-                                            width: parseInt(attribs.width, 10),
-                                            height: parseInt(attribs.height, 10),
+                    newData = {
+                        data: {
+                            target: {
+                                sys: {
+                                    space: {},
+                                    type: 'Asset',
+                                    createdAt: '',
+                                    updatedAt: '',
+                                    environment: {},
+                                    revision: null,
+                                    locale: 'en-US',
+                                },
+                                fields: {
+                                    title: R.head(R.split('.', fileName)),
+                                    description: attribs.alt,
+                                    file: {
+                                        url: attribs.src,
+                                        details: {
+                                            size: 46234, //@TODO - don't hardcode
+                                            image: {
+                                                width: parseInt(attribs.width, 10),
+                                                height: parseInt(attribs.height, 10),
+                                            },
                                         },
+                                        fileName,
+                                        contentType: 'image/' + R.last(R.split('.', fileName)),
                                     },
-                                    fileName,
-                                    contentType: 'image/' + R.last(R.split('.', fileName)),
                                 },
                             },
                         },
-                    },
-                    content: [],
-                    nodeType: htmlAttrs[type][name],
-                };
+                        content: [],
+                        nodeType: htmlAttrs[type][name],
+                    };
+                    break
+                case 'i':
+                case 'b':
+                case 'strong':
+                case 'u':
+                    newData = R.assoc('marks', R.append({ type: htmlAttrs[type][name] }, content[0].marks), content[0]);
+                    break;
+                case 'a':
+                    newData = {
+                        data: { uri: R.propOr('', 'href', attribs) },
+                        content,
+                        nodeType: htmlAttrs[type][name],
+                    };
+                    break;
+                case 'li':
+                    //@TODO shouldn't need to cast to an array...
+                    content = R.type(content) === 'Array' ? content : [content];
+                    let newContent = [];
 
-            } else if (R.contains(name, ['i', 'b', 'strong', 'u'])) {
-                newData = R.assoc('marks', R.append({ type: htmlAttrs[type][name] }, content[0].marks), content[0]);
-            } else if (name === 'a') {
-                newData = {
-                    data: { uri: R.propOr('', 'href', attribs) },
-                    content,
-                    nodeType: htmlAttrs[type][name],
-                };
-            } else if(name === 'li') {
-                //@TODO shouldn't need to cast to an array...
-                content = R.type(content) === 'Array' ? content : [content];
-                let newContent = [];
-
-                //Seems to want text wrapped in some type of content tag (p, h*, etc)
-                content = R.forEach((node)=> {
-                    if (node.nodeType === 'text') {
-                        //if the last of new content isn't a `paragraph`
-                        if (R.propOr(false, 'nodeType', R.last(newContent)) !== 'paragraph') {
-                            //append a p node
-                            newContent = R.append({
-                                "data": {},
-                                "content": [],
-                                "nodeType": "paragraph"
-                            }, newContent);
+                    //Seems to want text wrapped in some type of content tag (p, h*, etc)
+                    content = R.forEach((node)=> {
+                        if (node.nodeType === 'text') {
+                            //if the last of new content isn't a `paragraph`
+                            if (R.propOr(false, 'nodeType', R.last(newContent)) !== 'paragraph') {
+                                //append a p node
+                                newContent = R.append({
+                                    "data": {},
+                                    "content": [],
+                                    "nodeType": "paragraph"
+                                }, newContent);
+                            }
+                            //put node in R.last(newContent).content
+                            newContent[newContent.length - 1].content.push(node);
+                        } else {
+                            newContent = R.append(node, newContent);
                         }
-                        //put node in R.last(newContent).content
-                        newContent[newContent.length - 1].content.push(node);
-                    } else {
-                        newContent = R.append(node, newContent);
-                    }
-                }, content);
+                    }, content);
 
-                newData = {
-                    data: {},
-                    content: newContent,
-                    nodeType: htmlAttrs[type][name],
-                };
-            } else {
-                //They want to make sure there is always a text element inside paragraphs
-                if (name === 'p' && !content.length) {
-                    content = [{
+                    newData = {
                         data: {},
-                        marks: [],
-                        value: '',
-                        nodeType: 'text',
-                    }];
-                }
+                        content: newContent,
+                        nodeType: htmlAttrs[type][name],
+                    };
+                    break;
+                case 'p':
+                case 'h1':
+                case 'h2':
+                case 'h3':
+                case 'h4':
+                case 'h5':
+                    if (!content.length) {
+                        content = [{
+                            data: {},
+                            marks: [],
+                            value: '',
+                            nodeType: 'text',
+                        }];
+                    } else {
+                        //@TODO check for br tags...
+                    }
+                    //falls through
+                default:
+                    if (!htmlAttrs[type][name]) {
+                        console.log('*** new data needed under -', type, name);
+                    }
 
-                newData = {
-                    data: {},
-                    content,
-                    nodeType: htmlAttrs[type][name],
-                };
+                    newData = {
+                        data: {},
+                        content,
+                        nodeType: htmlAttrs[type][name],
+                    };
+                    break;
             }
         } else {
             console.log('***new type needed -', type, data);
         }
+
+
         results = R.type(newData) === 'Array' ? R.concat(results, newData) : R.append(newData, results);
     }, dom);
     return results;

@@ -1,6 +1,6 @@
 {
   "name": "contentful-html-rich-text-converter",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Restructure html into contentful's rich-text model",
   "homepage": "https://github.com/sethimcclaine/contentful-html-rich-text-converter",
   "main": "index.js",

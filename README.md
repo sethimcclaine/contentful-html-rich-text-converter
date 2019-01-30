@@ -103,6 +103,7 @@ Output:
 
 ### In development
 * `<img>`
+* `<br />`
 
 ##Git Repository
 
