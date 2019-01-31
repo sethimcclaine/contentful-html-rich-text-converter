@@ -1,6 +1,6 @@
 const htmlParser = require('htmlparser');
 const R = require('ramda');
-const { paragraph } = require('./helpers');
+const { paragraph, styles } = require('./helpers');
 const htmlAttrs = {
     tag: {
         ul: 'unordered-list',
@@ -107,7 +107,7 @@ const transformDom = (dom) => {
                 case 'b':
                 case 'strong':
                 case 'u':
-                    newData = R.assoc('marks', R.append({ type: htmlAttrs[type][name] }, content[0].marks), content[0]);
+                    newData = styles(content, htmlAttrs[type][name]);
                     break;
                 case 'a':
                     newData = {

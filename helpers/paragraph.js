@@ -1,6 +1,6 @@
 const R = require('ramda');
 
-module.exports = (subContent, nodeType) => {
+const paragraph = (subContent, nodeType) => {
     let subNodes = [];
     if (!subContent.length) {
         subNodes = [[{
@@ -30,3 +30,5 @@ module.exports = (subContent, nodeType) => {
 
     return newData;
 };
+
+module.exports = paragraph;
