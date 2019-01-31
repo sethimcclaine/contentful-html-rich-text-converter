@@ -126,16 +126,7 @@ const transformDom = (dom) => {
                         if (node.nodeType === 'text') {
                             //if the last of new content isn't a `paragraph`
                             if (R.propOr(false, 'nodeType', R.last(newContent)) !== 'paragraph') {
-                                //append a p node
-                                /*
-                                newContent = R.append({
-                                    data: {},
-                                    content: [],
-                                    nodeType: 'paragraph'
-                                }, newContent);
-                                /*/
                                 newContent = R.concat(newContent, paragraph([], 'paragraph'));
-                                //*/
                             }
                             //put node in R.last(newContent).content
                             newContent[newContent.length - 1].content.push(node);
