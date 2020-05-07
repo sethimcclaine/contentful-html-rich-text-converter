@@ -104,6 +104,7 @@ const transformDom = (dom) => {
                     };
                     break
                 case 'i':
+                case 'em':
                 case 'b':
                 case 'strong':
                 case 'u':
