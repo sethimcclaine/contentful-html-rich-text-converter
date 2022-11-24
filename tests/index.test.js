@@ -138,7 +138,7 @@ htmlTest(
 )
 htmlTest(
     '<p>Before </p><ul><li>Plug-in read</li><li>Copy as<strong> C:\\{Number}</strong></li><li>Please <u>do not </u> the </li><li>Keep a backup</li><li>If  via $<u>{Email}</u></li></ul><h2><strong><a><strong>Lab</strong></a><strong> </strong></strong></h2><ul><li>Used </li><li>Uses </li><li>Access </li></ul><h2><strong><a><strong>Local</strong></a></strong></h2><ul><li>your</li><li>are </li></ul><p><span><span><span><span><span><span><span> </span></span></span></span></span></span></span></p>',
-    '<p>Before </p><ul><li><p>Plug-in read</p></li><li><p>Copy as<b> C:\\{Number}</b></p></li><li><p>Please <u>do not </u> the </p></li><li><p>Keep a backup</p></li><li><p>If  via $<u>{Email}</u></p></li></ul><h2><a href=""><b>Lab</b></a></h2><ul><li><p>Used </p></li><li><p>Uses </p></li><li><p>Access </p></li></ul><h2><a href=""><b>Local</b></a></h2><ul><li><p>your</p></li><li><p>are </p></li></ul><p> </p>'
+    '<p>Before </p><ul><li><p>Plug-in read</p></li><li><p>Copy as<b> C:\\{Number}</b></p></li><li><p>Please <u>do not </u> the </p></li><li><p>Keep a backup</p></li><li><p>If  via $<u>{Email}</u></p></li></ul><h2><a href=""><b><b>Lab</b></b></a><b><b> </b></b></h2><ul><li><p>Used </p></li><li><p>Uses </p></li><li><p>Access </p></li></ul><h2><a href=""><b><b>Local</b></b></a></h2><ul><li><p>your</p></li><li><p>are </p></li></ul><p> </p>'
 );
 htmlTest(
     '<p>Next</p><ul><li>Open</li><li>is: <strong>${gateway}</strong></li><li>verify.<br /><strong>-c 3 ${gateway}</strong></li></ul><p><img alt="Screenshot" data-entity-type="file" data-entity-uuid="bb" height="246" src="/sites/default/Test.png" width="485" /></p><ul><li>If contact <u><a href="mailto:Support@test.org">Support@test.org</a></u> assistance.</li></ul>',
