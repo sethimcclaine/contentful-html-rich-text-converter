@@ -123,7 +123,7 @@ const transformDom = (dom) => {
 
                     //Seems to want text wrapped in some type of content tag (p, h*, etc)
                     content = R.forEach((node)=> {
-                        if (node.nodeType === 'text') {
+                        if (node.nodeType === 'text' || node.nodeType === 'hyperlink') {
                             //if the last of new content isn't a `paragraph`
                             if (R.propOr(false, 'nodeType', R.last(newContent)) !== 'paragraph') {
                                 newContent = R.concat(newContent, paragraph([], 'paragraph'));
