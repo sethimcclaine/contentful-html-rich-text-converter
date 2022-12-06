@@ -29,6 +29,8 @@ const htmlAttrs = {
     text: 'text',
 };
 
+const invalidNodeTypes = ['bold', 'italic'];
+
 let transformed = []; //What should come out in the end
 
 const transformDom = (dom) => {
@@ -104,6 +106,7 @@ const transformDom = (dom) => {
                     };
                     break
                 case 'i':
+                case 'em':
                 case 'b':
                 case 'strong':
                 case 'u':
@@ -158,7 +161,7 @@ const transformDom = (dom) => {
                     newData = {
                         data: {},
                         content,
-                        nodeType: htmlAttrs[type][name],
+                        nodeType: invalidNodeTypes.includes(htmlAttrs[type][name]) ? "paragraph" : htmlAttrs[type][name],
                     };
                     break;
             }
