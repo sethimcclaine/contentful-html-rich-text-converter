@@ -104,6 +104,7 @@ const transformDom = (dom) => {
                     };
                     break
                 case 'i':
+                case 'em':
                 case 'b':
                 case 'strong':
                 case 'u':
@@ -156,9 +157,10 @@ const transformDom = (dom) => {
                     }
 
                     newData = {
+                        marks: invalidNodeTypes.contains(htmlAttrs[type][name]) ? [{type: htmlAttrs[type][name]}] : [],
                         data: {},
                         content,
-                        nodeType: htmlAttrs[type][name],
+                        nodeType: invalidNodeTypes.contains(htmlAttrs[type][name]) ? "paragraph" : htmlAttrs[type][name],
                     };
                     break;
             }
