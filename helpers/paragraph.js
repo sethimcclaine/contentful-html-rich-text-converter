@@ -27,7 +27,7 @@ const paragraph = (subContent, nodeType) => {
     newData = R.map((content) => ({
         data: {},
         content,
-        nodeType: invalidNodeTypes.includes(nodeType) ? "text" : nodeType,
+        nodeType: invalidNodeTypes.includes(nodeType) ? "paragraph" : nodeType,
     }), subNodes);
 
     return newData;
