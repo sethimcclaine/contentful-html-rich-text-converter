@@ -1,5 +1,7 @@
 const R = require('ramda');
 
+const invalidNodeTypes = ['bold', 'italic'];
+
 const paragraph = (subContent, nodeType) => {
     let subNodes = [];
     if (!subContent.length) {
@@ -25,7 +27,7 @@ const paragraph = (subContent, nodeType) => {
     newData = R.map((content) => ({
         data: {},
         content,
-        nodeType: ["bold", "italic"].contains(nodeType) ? "text" : nodeType,
+        nodeType: invalidNodeTypes.contains(nodeType) ? "text" : nodeType,
     }), subNodes);
 
     return newData;
