@@ -29,6 +29,8 @@ const htmlAttrs = {
     text: 'text',
 };
 
+const invalidNodeTypes = ['bold', 'italic'];
+
 let transformed = []; //What should come out in the end
 
 const transformDom = (dom) => {
