@@ -159,7 +159,6 @@ const transformDom = (dom) => {
                     }
 
                     newData = {
-                        marks: invalidNodeTypes.includes(htmlAttrs[type][name]) ? [{type: htmlAttrs[type][name]}] : [],
                         data: {},
                         content,
                         nodeType: invalidNodeTypes.includes(htmlAttrs[type][name]) ? "paragraph" : htmlAttrs[type][name],
