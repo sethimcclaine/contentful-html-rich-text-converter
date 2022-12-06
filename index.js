@@ -159,10 +159,10 @@ const transformDom = (dom) => {
                     }
 
                     newData = {
-                        marks: invalidNodeTypes.contains(htmlAttrs[type][name]) ? [{type: htmlAttrs[type][name]}] : [],
+                        marks: invalidNodeTypes.includes(htmlAttrs[type][name]) ? [{type: htmlAttrs[type][name]}] : [],
                         data: {},
                         content,
-                        nodeType: invalidNodeTypes.contains(htmlAttrs[type][name]) ? "paragraph" : htmlAttrs[type][name],
+                        nodeType: invalidNodeTypes.includes(htmlAttrs[type][name]) ? "paragraph" : htmlAttrs[type][name],
                     };
                     break;
             }
