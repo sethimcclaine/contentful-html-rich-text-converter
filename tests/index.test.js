@@ -149,5 +149,9 @@ htmlTest(
     '<ul><li>Ping.<br /><strong>ping</strong> test</li></ul>',
     '<ul><li><p>Ping.</p><p><b>ping</b> test</p></li></ul>'
 );
+htmlTest(
+    '<em>Test</em>',
+    '<i>Test</i>'
+);
 //not working
 //console.log(htmlTest('<ul><li><a>Ping.<br /><strong>ping</strong> test</a></li></ul>', '<ul><li><a>Ping.<br /><strong>ping</strong> test</a></li></ul>'));
