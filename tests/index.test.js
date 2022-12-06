@@ -74,6 +74,7 @@ const printRes = (title, file) => {
     const res = runTest(require(file));
     const color = res ? "\x1b[42m" : "\x1b[41m";
     const status = res ? '✓' : '×';
+
     console.log(color, status, "\x1b[0m", title); //valid
 }
 //*
