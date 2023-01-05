@@ -151,8 +151,8 @@ htmlTest(
     '<ul><li><p>Ping.</p><p><b>ping</b> test</p></li></ul>'
 );
 htmlTest(
-    '<table><tbody><tr><th><p>Updated Column 1</p></th><th><p>Test Column 2</p></th></tr></tbody></table><p></p>',
-    '<table><tr><th><p>Updated Column 1</p></th><th><p>Test Column 2</p></th></tr></table><p></p>'
+    '<p>Test paragraph before table</p><table><tbody><tr><th><p>Test Column 1</p></th><th><p>Test Column 2</p><p></p></th></tr><tr><td><p><u>Cell 1-1</u></p></td><td><p><a href=\"www.google.com\">Cell 1-2</a></p></td></tr><tr><td><p><i>Cell 2-1</i></p></td><td><p></p></td></tr><tr><td><p><b>Cell 3-1</b></p></td><td><p>Cell 3-2</p></td></tr></tbody></table><p>Test paragraph after table</p>',
+    '<p>Test paragraph before table</p><table><tr><th><p>Test Column 1</p></th><th><p>Test Column 2</p><p></p></th></tr><tr><td><p><u>Cell 1-1</u></p></td><td><p><a href=\"www.google.com\">Cell 1-2</a></p></td></tr><tr><td><p><i>Cell 2-1</i></p></td><td><p></p></td></tr><tr><td><p><b>Cell 3-1</b></p></td><td><p>Cell 3-2</p></td></tr></table><p>Test paragraph after table</p>'
 )
 //not working
 //console.log(htmlTest('<ul><li><a>Ping.<br /><strong>ping</strong> test</a></li></ul>', '<ul><li><a>Ping.<br /><strong>ping</strong> test</a></li></ul>'));
