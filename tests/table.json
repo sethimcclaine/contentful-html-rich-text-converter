@@ -1,0 +1,59 @@
+{
+  "data": {},
+  "content": [
+    {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Updated Column 1",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "table-header-cell"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Test Column 2",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "table-header-cell"
+            }
+          ],
+          "nodeType": "table-row"
+        }
+      ],
+      "nodeType": "table"
+    },
+    {
+      "data": {},
+      "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+      "nodeType": "paragraph"
+    }
+  ],
+  "nodeType": "document"
+}

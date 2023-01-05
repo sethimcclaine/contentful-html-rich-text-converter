@@ -86,7 +86,9 @@ printRes('blockquote', './blockquote.json');
 printRes('headings', './headings.json');
 printRes('hyperlink', './hyperlink.json');
 printRes('codeblock', './codeblock.json');
+printRes('table', './table.json');
 printRes('Break Things #1', './break1.json');
+
 //Still broken
 //console.log('img:' + runTest(require('./img.json'), ['content', 0, 'data', 'target'], false));
 //printRes('img', './img.json');
@@ -148,5 +150,9 @@ htmlTest(
     '<ul><li>Ping.<br /><strong>ping</strong> test</li></ul>',
     '<ul><li><p>Ping.</p><p><b>ping</b> test</p></li></ul>'
 );
+htmlTest(
+    '<table><tbody><tr><th><p>Updated Column 1</p></th><th><p>Test Column 2</p></th></tr></tbody></table><p></p>',
+    '<table><tr><th><p>Updated Column 1</p></th><th><p>Test Column 2</p></th></tr></table><p></p>'
+)
 //not working
 //console.log(htmlTest('<ul><li><a>Ping.<br /><strong>ping</strong> test</a></li></ul>', '<ul><li><a>Ping.<br /><strong>ping</strong> test</a></li></ul>'));

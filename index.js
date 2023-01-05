@@ -25,6 +25,10 @@ const htmlAttrs = {
         u: 'underline',
         img: 'embedded-asset-block',
         span: 'text',
+        table: 'table',
+        th: 'table-header-cell',
+        tr: 'table-row',
+        td: 'table-cell'
     },
     text: 'text',
 };
@@ -35,6 +39,13 @@ const transformDom = (dom) => {
     let results = [];
 
     R.forEach((elm) => {
+
+        //CHECK FOR: [] INFINITE CHILDREN  [] RECURSION  [] ASSETS  [] PARAGRAPHS BEFORE AND AFTER
+        //RTF Tables in Contentful. Contentful currently pass a 'tbody' tag which isn't supported when importing. This removes it from the hierarchy.
+        if (elm?.children?.[0].name == 'tbody') {
+            elm.children.splice(0, 1, elm.children[0].children[0]);
+        }
+
         const { type, name, data, attribs, children } = elm;
         //console.log(elm);
         let content = [];
@@ -173,6 +184,7 @@ const transformDom = (dom) => {
 };
 
 const handleFn = (error, dom) => {
+    //dom.window.document.querySelector('tbody'); COME BACK TO
     if (error) {
         throw error;
     }
