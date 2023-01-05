@@ -104,6 +104,7 @@ Output:
 
 ### In development
 * `<img>`
+* `<table>`
 
 ##Git Repository
 
