@@ -101,10 +101,10 @@ Output:
 * `<a>`
 * `<code>`
 * `<br />`
+* `<table>`
 
 ### In development
 * `<img>`
-* `<table>`
 
 ##Git Repository
 
