@@ -183,7 +183,6 @@ const transformDom = (dom) => {
 };
 
 const handleFn = (error, dom) => {
-    //dom.window.document.querySelector('tbody'); COME BACK TO
     if (error) {
         throw error;
     }
