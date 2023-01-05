@@ -40,10 +40,9 @@ const transformDom = (dom) => {
 
     R.forEach((elm) => {
 
-        //CHECK FOR: [] INFINITE CHILDREN  [] RECURSION  [] ASSETS  [] PARAGRAPHS BEFORE AND AFTER
         //RTF Tables in Contentful. Contentful currently pass a 'tbody' tag which isn't supported when importing. This removes it from the hierarchy.
         if (elm?.children?.[0].name == 'tbody') {
-            elm.children.splice(0, 1, elm.children[0].children[0]);
+            elm.children.splice(0, 1, ...elm.children[0].children);
         }
 
         const { type, name, data, attribs, children } = elm;
