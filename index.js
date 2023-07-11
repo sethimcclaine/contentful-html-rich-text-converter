@@ -79,33 +79,17 @@ const transformDom = (dom) => {
                 case 'img':
                     const fileName = R.last(R.split('/', attribs.src));
 
+                    if(dom.length===1){
+                        //@TODO need to append a paragraph node if there's a single Asset Link img tag
+                        throw new Error('Cannot convert a single Image tag.')
+                    }
                     newData = {
                         data: {
                             target: {
                                 sys: {
-                                    space: {},
-                                    type: 'Asset',
-                                    createdAt: '',
-                                    updatedAt: '',
-                                    environment: {},
-                                    revision: null,
-                                    locale: 'en-US',
-                                },
-                                fields: {
-                                    title: R.head(R.split('.', fileName)),
-                                    description: attribs.alt,
-                                    file: {
-                                        url: attribs.src,
-                                        details: {
-                                            size: 46234, //@TODO - don't hardcode
-                                            image: {
-                                                width: parseInt(attribs.width, 10),
-                                                height: parseInt(attribs.height, 10),
-                                            },
-                                        },
-                                        fileName,
-                                        contentType: 'image/' + R.last(R.split('.', fileName)),
-                                    },
+                                    id: `${attribs.id}`,
+                                    type: "Link",
+                                    linkType: "Asset",
                                 },
                             },
                         },
