@@ -43,8 +43,8 @@ const { BLOCKS } = require('@contentful/rich-text-types');
 const runTest = (richText, extension = [], json) => {
     const options = {
         renderNode: {
-            [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
-                `<img src="${fields.file.url}" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`,
+            [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { sys }}}) =>
+                `<img id="${sys.id}" alt="Screenshot" data-entity-type="file" data-entity-uuid="bb" height="246" src="/sites/default/Test.png" width="485"/>`,
         },
     };
     const html = documentToHtmlString(richText, options);
@@ -91,15 +91,15 @@ printRes('Break Things #1', './break1.json');
 
 //Still broken
 //console.log('img:' + runTest(require('./img.json'), ['content', 0, 'data', 'target'], false));
-//printRes('img', './img.json');
+printRes('img', './img.json');
 //*/
 
 const htmlTest = (html, testHtml, log = false) => {
     const json = parseHtml(html);
     const options = {
         renderNode: {
-            [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
-                `<img src="${fields.file.url}" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`,
+            [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { sys }}}) =>
+                `<img id="${sys.id}" src="/sites/default/Test.png" height="246" width="485" alt="Screenshot"/>`,
         },
     };
     const newHtml = documentToHtmlString(json, options);
@@ -143,8 +143,8 @@ htmlTest(
     '<p>Before </p><ul><li><p>Plug-in read</p></li><li><p>Copy as<b> C:\\{Number}</b></p></li><li><p>Please <u>do not </u> the </p></li><li><p>Keep a backup</p></li><li><p>If  via $<u>{Email}</u></p></li></ul><h2><a href=""><b><b>Lab</b></b></a><b><b> </b></b></h2><ul><li><p>Used </p></li><li><p>Uses </p></li><li><p>Access </p></li></ul><h2><a href=""><b><b>Local</b></b></a></h2><ul><li><p>your</p></li><li><p>are </p></li></ul><p> </p>'
 );
 htmlTest(
-    '<p>Next</p><ul><li>Open</li><li>is: <strong>${gateway}</strong></li><li>verify.<br /><strong>-c 3 ${gateway}</strong></li></ul><p><img alt="Screenshot" data-entity-type="file" data-entity-uuid="bb" height="246" src="/sites/default/Test.png" width="485" /></p><ul><li>If contact <u><a href="mailto:Support@test.org">Support@test.org</a></u> assistance.</li></ul>',
-    '<p>Next</p><ul><li><p>Open</p></li><li><p>is: <b>${gateway}</b></p></li><li><p>verify.</p><p><b>-c 3 ${gateway}</b></p></li></ul><p><img src="/sites/default/Test.png" height="246" width="485" alt="Screenshot"/></p><ul><li><p>If contact <a href="mailto:Support@test.org"><u>Support@test.org</u></a> assistance.</p></li></ul>'
+    '<p>Next</p><ul><li>Open</li><li>is: <strong>${gateway}</strong></li><li>verify.<br /><strong>-c 3 ${gateway}</strong></li></ul><img id="123456" alt="Screenshot" data-entity-type="file" data-entity-uuid="bb" height="246" src="/sites/default/Test.png" width="485" /><ul><li>If contact <u><a href="mailto:Support@test.org">Support@test.org</a></u> assistance.</li></ul>',
+    '<p>Next</p><ul><li><p>Open</p></li><li><p>is: <b>${gateway}</b></p></li><li><p>verify.</p><p><b>-c 3 ${gateway}</b></p></li></ul><img id="123456" src="/sites/default/Test.png" height="246" width="485" alt="Screenshot"/><ul><li><p>If contact <a href="mailto:Support@test.org"><u>Support@test.org</u></a> assistance.</p></li></ul>'
 );
 htmlTest(
     '<ul><li>Ping.<br /><strong>ping</strong> test</li></ul>',
